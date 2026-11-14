@@ -1,0 +1,1057 @@
+{
+  "version": 1,
+  "note": "Values are per 100 g of the food as described (cooked where applicable). 'sourced' items use public composition tables; 'estimated' items are typical home-recipe estimates and are labelled as such in the UI.",
+  "foods": [
+    {
+      "id": "f0000000-0000-4000-8000-000000000001",
+      "name": "Chapati / Roti",
+      "category": "Indian staples",
+      "description": "Whole-wheat flatbread cooked on a tawa. One medium roti weighs about 40 g.",
+      "servingName": "1 medium roti",
+      "servingGrams": 40,
+      "extraServings": [{ "label": "1 large roti", "grams": 55 }],
+      "kcal": 297, "protein": 9, "carbs": 46, "fat": 7, "fiber": 6.5, "sugar": 2, "sodium": 350,
+      "source": "IFCT 2017 / typical home recipe", "sourceUrl": "https://www.nin.res.in/", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000002",
+      "name": "Steamed rice",
+      "category": "Indian staples",
+      "description": "Plain white rice, cooked. One katori is roughly 150 g.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 130, "protein": 2.7, "carbs": 28.2, "fat": 0.3, "fiber": 0.4, "sugar": 0.1, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000003",
+      "name": "Basmati rice",
+      "category": "Indian staples",
+      "description": "Cooked basmati rice. Values vary with water absorption.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 121, "protein": 3, "carbs": 25.2, "fat": 0.4, "fiber": 0.4, "sugar": 0.1, "sodium": 1,
+      "source": "USDA FoodData Central / typical cooked value", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000004",
+      "name": "Jeera rice",
+      "category": "Indian staples",
+      "description": "Rice tempered with cumin and a little oil or ghee.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 170, "protein": 3.2, "carbs": 29, "fat": 4.5, "fiber": 1, "sugar": 0.1, "sodium": 220,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000005",
+      "name": "Vegetable pulao",
+      "category": "Indian staples",
+      "description": "Rice cooked with mixed vegetables and spices.",
+      "servingName": "1 bowl",
+      "servingGrams": 180,
+      "kcal": 160, "protein": 4, "carbs": 25, "fat": 5, "fiber": 1.5, "sugar": 1.2, "sodium": 280,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000006",
+      "name": "Khichdi",
+      "category": "Indian staples",
+      "description": "Comforting rice and moong dal dish, cooked soft.",
+      "servingName": "1 bowl",
+      "servingGrams": 200,
+      "kcal": 120, "protein": 5, "carbs": 20, "fat": 2.5, "fiber": 1.8, "sugar": 0.5, "sodium": 260,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000007",
+      "name": "Curd rice",
+      "category": "Indian staples",
+      "description": "Cooked rice mixed with curd and a light tempering.",
+      "servingName": "1 bowl",
+      "servingGrams": 200,
+      "kcal": 140, "protein": 4, "carbs": 21, "fat": 4, "fiber": 0.6, "sugar": 2, "sodium": 180,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000008",
+      "name": "Lemon rice",
+      "category": "Indian staples",
+      "description": "Rice with lemon, peanuts and curry leaves.",
+      "servingName": "1 bowl",
+      "servingGrams": 180,
+      "kcal": 180, "protein": 3.5, "carbs": 30, "fat": 5, "fiber": 0.7, "sugar": 0.4, "sodium": 300,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000009",
+      "name": "Poha",
+      "category": "Indian staples",
+      "description": "Flattened rice with onions, peanuts and turmeric.",
+      "servingName": "1 bowl",
+      "servingGrams": 150,
+      "kcal": 130, "protein": 2.7, "carbs": 27, "fat": 1.5, "fiber": 0.9, "sugar": 1.1, "sodium": 280,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000010",
+      "name": "Upma",
+      "category": "Indian staples",
+      "description": "Semolina porridge with vegetables and tempering.",
+      "servingName": "1 bowl",
+      "servingGrams": 150,
+      "kcal": 145, "protein": 3.5, "carbs": 24, "fat": 4, "fiber": 1.2, "sugar": 1, "sodium": 300,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000011",
+      "name": "Plain dosa",
+      "category": "Indian staples",
+      "description": "Fermented rice-and-lentil crepe cooked with little oil.",
+      "servingName": "1 dosa",
+      "servingGrams": 90,
+      "kcal": 168, "protein": 3.9, "carbs": 28.7, "fat": 4.3, "fiber": 1, "sugar": 0.6, "sodium": 240,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000012",
+      "name": "Masala dosa",
+      "category": "Indian staples",
+      "description": "Dosa filled with spiced potato masala.",
+      "servingName": "1 dosa",
+      "servingGrams": 130,
+      "kcal": 213, "protein": 4.2, "carbs": 32, "fat": 7.5, "fiber": 1.4, "sugar": 0.8, "sodium": 320,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000013",
+      "name": "Idli",
+      "category": "Indian staples",
+      "description": "Steamed fermented rice-and-urad-dal cake.",
+      "servingName": "1 idli",
+      "servingGrams": 40,
+      "kcal": 140, "protein": 4.5, "carbs": 29, "fat": 0.4, "fiber": 1, "sugar": 0.3, "sodium": 190,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000014",
+      "name": "Medu vada",
+      "category": "Indian staples",
+      "description": "Deep-fried urad dal fritter.",
+      "servingName": "1 vada",
+      "servingGrams": 45,
+      "kcal": 256, "protein": 6, "carbs": 30, "fat": 12, "fiber": 1.5, "sugar": 0.4, "sodium": 320,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000015",
+      "name": "Chicken biryani",
+      "category": "Indian dishes",
+      "description": "Layered basmati rice with spiced chicken. Restaurant versions are often richer.",
+      "servingName": "1 plate",
+      "servingGrams": 200,
+      "kcal": 192, "protein": 8.5, "carbs": 23.5, "fat": 7, "fiber": 0.8, "sugar": 0.6, "sodium": 380,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000016",
+      "name": "Vegetable biryani",
+      "category": "Indian dishes",
+      "description": "Spiced rice with mixed vegetables.",
+      "servingName": "1 plate",
+      "servingGrams": 200,
+      "kcal": 175, "protein": 4, "carbs": 26, "fat": 6, "fiber": 1.2, "sugar": 1.4, "sodium": 340,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000017",
+      "name": "Paneer butter masala",
+      "category": "Indian dishes",
+      "description": "Paneer in a tomato-butter gravy. Values can vary widely with cream and butter.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 220, "protein": 8, "carbs": 10, "fat": 17, "fiber": 1.5, "sugar": 4, "sodium": 420,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000018",
+      "name": "Palak paneer",
+      "category": "Indian dishes",
+      "description": "Paneer cubes in a spiced spinach gravy.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 180, "protein": 9, "carbs": 7, "fat": 13, "fiber": 2, "sugar": 1.5, "sodium": 380,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000019",
+      "name": "Dal makhani",
+      "category": "Indian dishes",
+      "description": "Black lentils slow-cooked with butter and cream.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 180, "protein": 7, "carbs": 18, "fat": 9, "fiber": 3, "sugar": 2, "sodium": 400,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000020",
+      "name": "Dal fry",
+      "category": "Indian dishes",
+      "description": "Toor dal tempered with onion, tomato and spices.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 120, "protein": 6, "carbs": 15, "fat": 4, "fiber": 2.5, "sugar": 1, "sodium": 350,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000021",
+      "name": "Rajma curry",
+      "category": "Indian dishes",
+      "description": "Kidney beans simmered in an onion-tomato gravy.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 140, "protein": 7, "carbs": 18, "fat": 4.5, "fiber": 4, "sugar": 2, "sodium": 360,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000022",
+      "name": "Chole",
+      "category": "Indian dishes",
+      "description": "Chickpea curry with spices. Values based on cooked chickpeas plus a light gravy.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 164, "protein": 8.9, "carbs": 27.4, "fat": 2.6, "fiber": 7.6, "sugar": 3, "sodium": 340,
+      "source": "USDA FoodData Central (cooked chickpeas) / recipe estimate", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000023",
+      "name": "Sambar",
+      "category": "Indian dishes",
+      "description": "South Indian lentil stew with vegetables and tamarind.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 80, "protein": 4, "carbs": 10, "fat": 2.5, "fiber": 2, "sugar": 2, "sodium": 380,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000024",
+      "name": "Rasam",
+      "category": "Indian dishes",
+      "description": "Thin, peppery tamarind and tomato broth.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 40, "protein": 1.5, "carbs": 5, "fat": 1.5, "fiber": 0.8, "sugar": 2, "sodium": 400,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000025",
+      "name": "Coconut chutney",
+      "category": "Indian dishes",
+      "description": "Fresh coconut chutney with tempering.",
+      "servingName": "2 tbsp",
+      "servingGrams": 40,
+      "kcal": 157, "protein": 3, "carbs": 8, "fat": 13, "fiber": 3, "sugar": 2, "sodium": 280,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000026",
+      "name": "Chicken curry",
+      "category": "Indian dishes",
+      "description": "Home-style chicken curry with onion-tomato masala.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 150, "protein": 12, "carbs": 5, "fat": 9, "fiber": 1, "sugar": 2, "sodium": 400,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000027",
+      "name": "Egg curry",
+      "category": "Indian dishes",
+      "description": "Boiled eggs simmered in a spiced gravy.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 145, "protein": 9, "carbs": 5, "fat": 10, "fiber": 0.5, "sugar": 2, "sodium": 380,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000028",
+      "name": "Fish curry",
+      "category": "Indian dishes",
+      "description": "Fish simmered in a spiced coconut or tomato gravy.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 120, "protein": 12, "carbs": 4, "fat": 6, "fiber": 0.5, "sugar": 2, "sodium": 360,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000029",
+      "name": "Mutton curry",
+      "category": "Indian dishes",
+      "description": "Slow-cooked mutton in a spiced onion gravy.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 220, "protein": 15, "carbs": 4, "fat": 16, "fiber": 0.6, "sugar": 2, "sodium": 420,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000030",
+      "name": "Pav bhaji",
+      "category": "Indian dishes",
+      "description": "Mashed vegetable curry served with buttered pav. Values are for the bhaji only.",
+      "servingName": "1 serving bhaji",
+      "servingGrams": 200,
+      "kcal": 160, "protein": 4, "carbs": 20, "fat": 7, "fiber": 3, "sugar": 4, "sodium": 450,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000031",
+      "name": "Aloo paratha",
+      "category": "Indian dishes",
+      "description": "Wheat flatbread stuffed with spiced potato.",
+      "servingName": "1 paratha",
+      "servingGrams": 70,
+      "kcal": 250, "protein": 5, "carbs": 35, "fat": 9, "fiber": 3, "sugar": 1, "sodium": 350,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000032",
+      "name": "Plain paratha",
+      "category": "Indian dishes",
+      "description": "Layered whole-wheat flatbread pan-fried with ghee or oil.",
+      "servingName": "1 paratha",
+      "servingGrams": 70,
+      "kcal": 330, "protein": 7, "carbs": 45, "fat": 13, "fiber": 3, "sugar": 1, "sodium": 300,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000033",
+      "name": "Samosa",
+      "category": "Snacks",
+      "description": "Deep-fried pastry filled with spiced potato and peas.",
+      "servingName": "1 samosa",
+      "servingGrams": 50,
+      "kcal": 308, "protein": 4.5, "carbs": 32, "fat": 18, "fiber": 2, "sugar": 1.5, "sodium": 420,
+      "source": "Typical recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000034",
+      "name": "Paneer tikka",
+      "category": "Indian dishes",
+      "description": "Marinated paneer cubes grilled or baked.",
+      "servingName": "5 pieces",
+      "servingGrams": 100,
+      "kcal": 260, "protein": 18, "carbs": 4, "fat": 19, "fiber": 0.5, "sugar": 2, "sodium": 380,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000035",
+      "name": "Tandoori chicken",
+      "category": "Indian dishes",
+      "description": "Yogurt-marinated chicken cooked in a tandoor or oven.",
+      "servingName": "1 piece",
+      "servingGrams": 100,
+      "kcal": 165, "protein": 25, "carbs": 2, "fat": 7, "fiber": 0, "sugar": 1, "sodium": 420,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000036",
+      "name": "Butter chicken",
+      "category": "Indian dishes",
+      "description": "Chicken in a creamy tomato-butter gravy.",
+      "servingName": "1 serving",
+      "servingGrams": 150,
+      "kcal": 175, "protein": 13, "carbs": 5, "fat": 12, "fiber": 0.6, "sugar": 3, "sodium": 420,
+      "source": "Typical restaurant-style recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000037",
+      "name": "Toor dal (cooked)",
+      "category": "Dals & legumes",
+      "description": "Plain cooked pigeon-pea dal, without tempering.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 116, "protein": 7, "carbs": 20, "fat": 0.4, "fiber": 8, "sugar": 1, "sodium": 2,
+      "source": "USDA FoodData Central (cooked lentils) / IFCT", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000038",
+      "name": "Moong dal (cooked)",
+      "category": "Dals & legumes",
+      "description": "Plain cooked yellow moong dal.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 105, "protein": 7, "carbs": 19, "fat": 0.4, "fiber": 7.6, "sugar": 1, "sodium": 2,
+      "source": "USDA FoodData Central (cooked mung beans)", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000039",
+      "name": "Chana dal (cooked)",
+      "category": "Dals & legumes",
+      "description": "Cooked split chickpeas.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 164, "protein": 8.9, "carbs": 27.4, "fat": 2.6, "fiber": 7.6, "sugar": 3, "sodium": 4,
+      "source": "USDA FoodData Central (cooked chickpeas)", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000040",
+      "name": "Rajma (cooked)",
+      "category": "Dals & legumes",
+      "description": "Plain cooked kidney beans.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 127, "protein": 8.7, "carbs": 22.8, "fat": 0.5, "fiber": 6.4, "sugar": 0.3, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000041",
+      "name": "Soya chunks (dry)",
+      "category": "Dals & legumes",
+      "description": "Textured soy protein. Weigh dry; it roughly triples in weight when soaked.",
+      "servingName": "1 serving dry",
+      "servingGrams": 30,
+      "kcal": 336, "protein": 52, "carbs": 30, "fat": 1.5, "fiber": 18, "sugar": 4, "sodium": 3,
+      "source": "USDA FoodData Central (soy protein) / label values", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000042",
+      "name": "Moong sprouts",
+      "category": "Dals & legumes",
+      "description": "Raw sprouted mung beans.",
+      "servingName": "1 bowl",
+      "servingGrams": 100,
+      "kcal": 30, "protein": 3, "carbs": 6, "fat": 0.2, "fiber": 1.8, "sugar": 4, "sodium": 6,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000043",
+      "name": "Tofu (firm)",
+      "category": "Dals & legumes",
+      "description": "Firm tofu, drained.",
+      "servingName": "1 serving",
+      "servingGrams": 100,
+      "kcal": 76, "protein": 8, "carbs": 1.9, "fat": 4.8, "fiber": 0.3, "sugar": 0.6, "sodium": 7,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000044",
+      "name": "Mixed vegetable sabzi",
+      "category": "Vegetables",
+      "description": "Dry mixed-vegetable curry with a little oil.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 90, "protein": 2.5, "carbs": 9, "fat": 5, "fiber": 2.5, "sugar": 3, "sodium": 320,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000045",
+      "name": "Aloo sabzi",
+      "category": "Vegetables",
+      "description": "Potato curry with spices.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 110, "protein": 2, "carbs": 15, "fat": 4.5, "fiber": 2, "sugar": 2, "sodium": 340,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000046",
+      "name": "Bhindi masala",
+      "category": "Vegetables",
+      "description": "Okra stir-fried with onions and spices.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 100, "protein": 2, "carbs": 8, "fat": 7, "fiber": 2.8, "sugar": 3, "sodium": 320,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000047",
+      "name": "Baingan bharta",
+      "category": "Vegetables",
+      "description": "Roasted aubergine mash with onion and tomato.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 95, "protein": 2, "carbs": 9, "fat": 6, "fiber": 3, "sugar": 4, "sodium": 340,
+      "source": "Typical home recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000048",
+      "name": "Potato (boiled)",
+      "category": "Vegetables",
+      "description": "Boiled potato without skin or added fat.",
+      "servingName": "1 medium potato",
+      "servingGrams": 150,
+      "kcal": 87, "protein": 1.9, "carbs": 20, "fat": 0.1, "fiber": 1.8, "sugar": 0.9, "sodium": 4,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000049",
+      "name": "Sweet potato (boiled)",
+      "category": "Vegetables",
+      "description": "Boiled sweet potato.",
+      "servingName": "1 medium",
+      "servingGrams": 130,
+      "kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "fiber": 3, "sugar": 4.2, "sodium": 55,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000050",
+      "name": "Broccoli",
+      "category": "Vegetables",
+      "description": "Raw broccoli florets.",
+      "servingName": "1 cup",
+      "servingGrams": 100,
+      "kcal": 34, "protein": 2.8, "carbs": 6.6, "fat": 0.4, "fiber": 2.6, "sugar": 1.7, "sodium": 33,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000051",
+      "name": "Spinach",
+      "category": "Vegetables",
+      "description": "Raw spinach leaves.",
+      "servingName": "1 cup",
+      "servingGrams": 100,
+      "kcal": 23, "protein": 2.9, "carbs": 3.6, "fat": 0.4, "fiber": 2.2, "sugar": 0.4, "sodium": 79,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000052",
+      "name": "Tomato",
+      "category": "Vegetables",
+      "description": "Raw tomato.",
+      "servingName": "1 medium",
+      "servingGrams": 100,
+      "kcal": 18, "protein": 0.9, "carbs": 3.9, "fat": 0.2, "fiber": 1.2, "sugar": 2.6, "sodium": 5,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000053",
+      "name": "Cucumber",
+      "category": "Vegetables",
+      "description": "Raw cucumber with peel.",
+      "servingName": "1 cup",
+      "servingGrams": 100,
+      "kcal": 15, "protein": 0.7, "carbs": 3.6, "fat": 0.1, "fiber": 0.5, "sugar": 1.7, "sodium": 2,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000054",
+      "name": "Onion",
+      "category": "Vegetables",
+      "description": "Raw onion.",
+      "servingName": "1 medium",
+      "servingGrams": 100,
+      "kcal": 40, "protein": 1.1, "carbs": 9.3, "fat": 0.1, "fiber": 1.7, "sugar": 4.2, "sodium": 4,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000055",
+      "name": "Banana",
+      "category": "Fruits",
+      "description": "Raw banana. A medium banana weighs about 118 g peeled.",
+      "servingName": "1 medium",
+      "servingGrams": 118,
+      "kcal": 89, "protein": 1.1, "carbs": 22.8, "fat": 0.3, "fiber": 2.6, "sugar": 12.2, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000056",
+      "name": "Apple",
+      "category": "Fruits",
+      "description": "Raw apple with skin.",
+      "servingName": "1 medium",
+      "servingGrams": 182,
+      "kcal": 52, "protein": 0.3, "carbs": 13.8, "fat": 0.2, "fiber": 2.4, "sugar": 10.4, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000057",
+      "name": "Mango",
+      "category": "Fruits",
+      "description": "Raw ripe mango flesh.",
+      "servingName": "1 cup sliced",
+      "servingGrams": 165,
+      "kcal": 60, "protein": 0.8, "carbs": 15, "fat": 0.4, "fiber": 1.6, "sugar": 13.7, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000058",
+      "name": "Orange",
+      "category": "Fruits",
+      "description": "Raw orange segments.",
+      "servingName": "1 medium",
+      "servingGrams": 140,
+      "kcal": 47, "protein": 0.9, "carbs": 11.8, "fat": 0.1, "fiber": 2.4, "sugar": 9.4, "sodium": 0,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000059",
+      "name": "Grapes",
+      "category": "Fruits",
+      "description": "Raw grapes.",
+      "servingName": "1 cup",
+      "servingGrams": 100,
+      "kcal": 69, "protein": 0.7, "carbs": 18.1, "fat": 0.2, "fiber": 0.9, "sugar": 15.5, "sodium": 2,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000060",
+      "name": "Papaya",
+      "category": "Fruits",
+      "description": "Raw papaya cubes.",
+      "servingName": "1 cup",
+      "servingGrams": 150,
+      "kcal": 43, "protein": 0.5, "carbs": 10.8, "fat": 0.3, "fiber": 1.7, "sugar": 7.8, "sodium": 8,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000061",
+      "name": "Guava",
+      "category": "Fruits",
+      "description": "Raw guava.",
+      "servingName": "1 medium",
+      "servingGrams": 100,
+      "kcal": 68, "protein": 2.6, "carbs": 14.3, "fat": 1, "fiber": 5.4, "sugar": 8.9, "sodium": 2,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000062",
+      "name": "Watermelon",
+      "category": "Fruits",
+      "description": "Raw watermelon cubes.",
+      "servingName": "1 cup",
+      "servingGrams": 200,
+      "kcal": 30, "protein": 0.6, "carbs": 7.6, "fat": 0.2, "fiber": 0.4, "sugar": 6.2, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000063",
+      "name": "Curd / Dahi",
+      "category": "Dairy & eggs",
+      "description": "Full-fat plain yogurt.",
+      "servingName": "1 katori",
+      "servingGrams": 150,
+      "kcal": 61, "protein": 3.5, "carbs": 4.7, "fat": 3.3, "fiber": 0, "sugar": 4.7, "sodium": 46,
+      "source": "USDA FoodData Central (whole-milk yogurt)", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000064",
+      "name": "Greek yogurt (plain)",
+      "category": "Dairy & eggs",
+      "description": "Plain non-fat Greek yogurt.",
+      "servingName": "1 cup",
+      "servingGrams": 170,
+      "kcal": 59, "protein": 10.2, "carbs": 3.6, "fat": 0.4, "fiber": 0, "sugar": 3.2, "sodium": 36,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000065",
+      "name": "Full-fat milk",
+      "category": "Dairy & eggs",
+      "description": "Whole cow's milk (3.25% fat).",
+      "servingName": "1 glass (240 ml)",
+      "servingGrams": 240,
+      "kcal": 61, "protein": 3.2, "carbs": 4.8, "fat": 3.3, "fiber": 0, "sugar": 5.1, "sodium": 43,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000066",
+      "name": "Toned milk",
+      "category": "Dairy & eggs",
+      "description": "Toned milk (about 2% fat).",
+      "servingName": "1 glass (240 ml)",
+      "servingGrams": 240,
+      "kcal": 47, "protein": 3.2, "carbs": 4.9, "fat": 1.7, "fiber": 0, "sugar": 4.9, "sodium": 44,
+      "source": "Typical Indian toned milk value / USDA 2% milk", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000067",
+      "name": "Paneer",
+      "category": "Dairy & eggs",
+      "description": "Full-fat Indian cottage cheese. Values vary by brand and moisture.",
+      "servingName": "1 serving",
+      "servingGrams": 100,
+      "kcal": 265, "protein": 18.3, "carbs": 1.2, "fat": 20.8, "fiber": 0, "sugar": 1.2, "sodium": 22,
+      "source": "IFCT 2017 (NIN, India)", "sourceUrl": "https://www.nin.res.in/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000068",
+      "name": "Egg (whole)",
+      "category": "Dairy & eggs",
+      "description": "One large egg, about 50 g.",
+      "servingName": "1 large egg",
+      "servingGrams": 50,
+      "kcal": 143, "protein": 12.6, "carbs": 0.7, "fat": 9.5, "fiber": 0, "sugar": 0.4, "sodium": 142,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000069",
+      "name": "Egg white",
+      "category": "Dairy & eggs",
+      "description": "White of one large egg, about 33 g.",
+      "servingName": "1 egg white",
+      "servingGrams": 33,
+      "kcal": 52, "protein": 10.9, "carbs": 0.7, "fat": 0.2, "fiber": 0, "sugar": 0.7, "sodium": 166,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000070",
+      "name": "Ghee",
+      "category": "Oils & condiments",
+      "description": "Clarified butter. Use small quantities — it is calorie-dense.",
+      "servingName": "1 tsp",
+      "servingGrams": 5,
+      "kcal": 900, "protein": 0, "carbs": 0, "fat": 100, "fiber": 0, "sugar": 0, "sodium": 0,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000071",
+      "name": "Butter",
+      "category": "Oils & condiments",
+      "description": "Salted butter.",
+      "servingName": "1 tsp",
+      "servingGrams": 5,
+      "kcal": 717, "protein": 0.9, "carbs": 0.1, "fat": 81.1, "fiber": 0, "sugar": 0.1, "sodium": 643,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000072",
+      "name": "Olive oil",
+      "category": "Oils & condiments",
+      "description": "Extra-virgin olive oil.",
+      "servingName": "1 tsp",
+      "servingGrams": 5,
+      "kcal": 884, "protein": 0, "carbs": 0, "fat": 100, "fiber": 0, "sugar": 0, "sodium": 2,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000073",
+      "name": "Chicken breast (cooked)",
+      "category": "Meat & seafood",
+      "description": "Skinless chicken breast, cooked.",
+      "servingName": "1 breast",
+      "servingGrams": 120,
+      "kcal": 165, "protein": 31, "carbs": 0, "fat": 3.6, "fiber": 0, "sugar": 0, "sodium": 74,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000074",
+      "name": "Chicken thigh (cooked)",
+      "category": "Meat & seafood",
+      "description": "Skinless chicken thigh, cooked.",
+      "servingName": "1 thigh",
+      "servingGrams": 110,
+      "kcal": 209, "protein": 26, "carbs": 0, "fat": 10.9, "fiber": 0, "sugar": 0, "sodium": 88,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000075",
+      "name": "Salmon (cooked)",
+      "category": "Meat & seafood",
+      "description": "Cooked Atlantic salmon.",
+      "servingName": "1 fillet",
+      "servingGrams": 150,
+      "kcal": 208, "protein": 20, "carbs": 0, "fat": 13, "fiber": 0, "sugar": 0, "sodium": 59,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000076",
+      "name": "Prawns (cooked)",
+      "category": "Meat & seafood",
+      "description": "Cooked prawns.",
+      "servingName": "1 serving",
+      "servingGrams": 100,
+      "kcal": 99, "protein": 24, "carbs": 0.2, "fat": 0.3, "fiber": 0, "sugar": 0, "sodium": 111,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000077",
+      "name": "Tuna (canned in water)",
+      "category": "Meat & seafood",
+      "description": "Drained canned tuna in water.",
+      "servingName": "1 can (drained)",
+      "servingGrams": 100,
+      "kcal": 116, "protein": 25.5, "carbs": 0, "fat": 0.8, "fiber": 0, "sugar": 0, "sodium": 247,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000078",
+      "name": "Oats (dry)",
+      "category": "Grains & cereals",
+      "description": "Rolled oats, dry. One serving is about 40 g.",
+      "servingName": "1 serving dry",
+      "servingGrams": 40,
+      "kcal": 389, "protein": 16.9, "carbs": 66.3, "fat": 6.9, "fiber": 10.6, "sugar": 1, "sodium": 2,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000079",
+      "name": "Whole-wheat bread",
+      "category": "Grains & cereals",
+      "description": "One slice is about 30 g.",
+      "servingName": "1 slice",
+      "servingGrams": 30,
+      "kcal": 247, "protein": 13, "carbs": 41, "fat": 4.2, "fiber": 7, "sugar": 4, "sodium": 400,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000080",
+      "name": "White bread",
+      "category": "Grains & cereals",
+      "description": "One slice is about 28 g.",
+      "servingName": "1 slice",
+      "servingGrams": 28,
+      "kcal": 265, "protein": 9, "carbs": 49, "fat": 3.2, "fiber": 2.7, "sugar": 5, "sodium": 491,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000081",
+      "name": "Pasta (cooked)",
+      "category": "Grains & cereals",
+      "description": "Cooked plain pasta.",
+      "servingName": "1 cup",
+      "servingGrams": 140,
+      "kcal": 131, "protein": 5, "carbs": 25, "fat": 1.1, "fiber": 1.8, "sugar": 0.6, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000082",
+      "name": "Quinoa (cooked)",
+      "category": "Grains & cereals",
+      "description": "Cooked quinoa.",
+      "servingName": "1 cup",
+      "servingGrams": 185,
+      "kcal": 120, "protein": 4.4, "carbs": 21.3, "fat": 1.9, "fiber": 2.8, "sugar": 0.9, "sodium": 7,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000083",
+      "name": "Brown rice (cooked)",
+      "category": "Grains & cereals",
+      "description": "Cooked brown rice.",
+      "servingName": "1 cup",
+      "servingGrams": 195,
+      "kcal": 123, "protein": 2.7, "carbs": 25.6, "fat": 1, "fiber": 1.6, "sugar": 0.2, "sodium": 4,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000084",
+      "name": "Oats with milk (cooked)",
+      "category": "Grains & cereals",
+      "description": "Rolled oats cooked with full-fat milk, no sugar.",
+      "servingName": "1 bowl",
+      "servingGrams": 250,
+      "kcal": 110, "protein": 4.5, "carbs": 15, "fat": 3.5, "fiber": 1.8, "sugar": 3, "sodium": 40,
+      "source": "Calculated from USDA oats and milk", "quality": "estimated", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000085",
+      "name": "Almonds",
+      "category": "Nuts & seeds",
+      "description": "Raw almonds. One serving is about 20 g (23 almonds).",
+      "servingName": "1 handful",
+      "servingGrams": 20,
+      "kcal": 579, "protein": 21.2, "carbs": 21.6, "fat": 49.9, "fiber": 12.5, "sugar": 4.4, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000086",
+      "name": "Walnuts",
+      "category": "Nuts & seeds",
+      "description": "Raw walnut halves.",
+      "servingName": "1 handful",
+      "servingGrams": 20,
+      "kcal": 654, "protein": 15.2, "carbs": 13.7, "fat": 65.2, "fiber": 6.7, "sugar": 2.6, "sodium": 2,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000087",
+      "name": "Peanut butter",
+      "category": "Nuts & seeds",
+      "description": "Smooth peanut butter. Check your jar — added sugar and oil change the values.",
+      "servingName": "1 tbsp",
+      "servingGrams": 16,
+      "kcal": 588, "protein": 25, "carbs": 20, "fat": 50, "fiber": 6, "sugar": 9, "sodium": 429,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000088",
+      "name": "Roasted chana",
+      "category": "Snacks",
+      "description": "Dry-roasted whole chickpeas.",
+      "servingName": "1 handful",
+      "servingGrams": 30,
+      "kcal": 364, "protein": 19, "carbs": 61, "fat": 5, "fiber": 17, "sugar": 5, "sodium": 24,
+      "source": "USDA FoodData Central (roasted chickpeas)", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000089",
+      "name": "Digestive biscuit",
+      "category": "Snacks",
+      "description": "Whole-wheat digestive biscuit.",
+      "servingName": "1 biscuit",
+      "servingGrams": 15,
+      "kcal": 480, "protein": 7, "carbs": 66, "fat": 20, "fiber": 5, "sugar": 20, "sodium": 450,
+      "source": "Typical packaged label (estimate)", "quality": "estimated", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000090",
+      "name": "Dark chocolate (70%)",
+      "category": "Snacks",
+      "description": "70% cocoa dark chocolate.",
+      "servingName": "2 squares",
+      "servingGrams": 20,
+      "kcal": 598, "protein": 7.8, "carbs": 45, "fat": 42.6, "fiber": 10.9, "sugar": 24, "sodium": 20,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000091",
+      "name": "Gulab jamun",
+      "category": "Snacks",
+      "description": "Milk-solid dumpling in sugar syrup.",
+      "servingName": "1 piece",
+      "servingGrams": 40,
+      "kcal": 330, "protein": 4, "carbs": 50, "fat": 13, "fiber": 0.2, "sugar": 35, "sodium": 60,
+      "source": "Typical sweet recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000092",
+      "name": "Jalebi",
+      "category": "Snacks",
+      "description": "Deep-fried fermented batter soaked in sugar syrup.",
+      "servingName": "1 piece",
+      "servingGrams": 30,
+      "kcal": 400, "protein": 4, "carbs": 60, "fat": 18, "fiber": 0.2, "sugar": 40, "sodium": 60,
+      "source": "Typical sweet recipe (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000093",
+      "name": "Masala chai",
+      "category": "Beverages",
+      "description": "Tea with milk and about one teaspoon of sugar.",
+      "servingName": "1 cup (150 ml)",
+      "servingGrams": 150,
+      "kcal": 55, "protein": 1.3, "carbs": 8.5, "fat": 1.6, "fiber": 0, "sugar": 7, "sodium": 20,
+      "source": "Typical home preparation (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000094",
+      "name": "Filter coffee with milk",
+      "category": "Beverages",
+      "description": "Coffee with milk, lightly sweetened.",
+      "servingName": "1 cup (150 ml)",
+      "servingGrams": 150,
+      "kcal": 35, "protein": 1.2, "carbs": 5, "fat": 1.2, "fiber": 0, "sugar": 4, "sodium": 18,
+      "source": "Typical home preparation (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000095",
+      "name": "Sweet lassi",
+      "category": "Beverages",
+      "description": "Blended curd drink with sugar.",
+      "servingName": "1 glass",
+      "servingGrams": 200,
+      "kcal": 80, "protein": 2.5, "carbs": 12, "fat": 2.5, "fiber": 0, "sugar": 10, "sodium": 30,
+      "source": "Typical home preparation (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000096",
+      "name": "Buttermilk (chaas)",
+      "category": "Beverages",
+      "description": "Spiced diluted curd drink, unsweetened.",
+      "servingName": "1 glass",
+      "servingGrams": 200,
+      "kcal": 25, "protein": 1.5, "carbs": 3, "fat": 0.7, "fiber": 0, "sugar": 2.5, "sodium": 105,
+      "source": "Typical home preparation (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000097",
+      "name": "Fresh lime water (sweetened)",
+      "category": "Beverages",
+      "description": "Nimbu pani with sugar.",
+      "servingName": "1 glass",
+      "servingGrams": 250,
+      "kcal": 40, "protein": 0.1, "carbs": 10, "fat": 0, "fiber": 0, "sugar": 9, "sodium": 5,
+      "source": "Typical home preparation (estimate)", "quality": "estimated", "cuisine": "indian"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000098",
+      "name": "Orange juice",
+      "category": "Beverages",
+      "description": "100% orange juice.",
+      "servingName": "1 glass (240 ml)",
+      "servingGrams": 240,
+      "kcal": 45, "protein": 0.7, "carbs": 10.4, "fat": 0.2, "fiber": 0.2, "sugar": 8.4, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000099",
+      "name": "Pizza margherita",
+      "category": "International",
+      "description": "Baked pizza with tomato, mozzarella and basil.",
+      "servingName": "1 slice",
+      "servingGrams": 100,
+      "kcal": 266, "protein": 11, "carbs": 33, "fat": 10, "fiber": 2.3, "sugar": 3.6, "sodium": 598,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000100",
+      "name": "Hummus",
+      "category": "International",
+      "description": "Chickpea and tahini dip.",
+      "servingName": "2 tbsp",
+      "servingGrams": 50,
+      "kcal": 166, "protein": 7.9, "carbs": 14.3, "fat": 9.6, "fiber": 6, "sugar": 0.3, "sodium": 379,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000101",
+      "name": "Chicken caesar salad",
+      "category": "International",
+      "description": "Lettuce, grilled chicken, parmesan and caesar dressing.",
+      "servingName": "1 bowl",
+      "servingGrams": 250,
+      "kcal": 190, "protein": 12, "carbs": 6, "fat": 13, "fiber": 1, "sugar": 2, "sodium": 480,
+      "source": "Typical recipe (estimate)", "quality": "estimated", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000102",
+      "name": "Spaghetti bolognese",
+      "category": "International",
+      "description": "Pasta with minced meat and tomato sauce.",
+      "servingName": "1 bowl",
+      "servingGrams": 250,
+      "kcal": 150, "protein": 8, "carbs": 18, "fat": 4, "fiber": 1.5, "sugar": 3, "sodium": 350,
+      "source": "Typical recipe (estimate)", "quality": "estimated", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000103",
+      "name": "Scrambled eggs",
+      "category": "International",
+      "description": "Eggs scrambled with a little butter or oil.",
+      "servingName": "2 eggs",
+      "servingGrams": 120,
+      "kcal": 149, "protein": 10, "carbs": 1.6, "fat": 11, "fiber": 0, "sugar": 1, "sodium": 145,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000104",
+      "name": "Sugar",
+      "category": "Oils & condiments",
+      "description": "White granulated sugar.",
+      "servingName": "1 tsp",
+      "servingGrams": 4,
+      "kcal": 387, "protein": 0, "carbs": 100, "fat": 0, "fiber": 0, "sugar": 100, "sodium": 1,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    },
+    {
+      "id": "f0000000-0000-4000-8000-000000000105",
+      "name": "Honey",
+      "category": "Oils & condiments",
+      "description": "Natural honey.",
+      "servingName": "1 tsp",
+      "servingGrams": 7,
+      "kcal": 304, "protein": 0.3, "carbs": 82.4, "fat": 0, "fiber": 0.2, "sugar": 82.1, "sodium": 4,
+      "source": "USDA FoodData Central", "sourceUrl": "https://fdc.nal.usda.gov/", "quality": "sourced", "cuisine": "international"
+    }
+  ]
+}

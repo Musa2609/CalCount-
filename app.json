@@ -8,9 +8,16 @@
     "scheme": "calcount",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "infoPlist": {
+        "NSCameraUsageDescription": "CalCount uses the camera to scan barcodes and photograph meals."
+      }
     },
     "android": {
+      "permissions": [
+        "CAMERA"
+      ],
+      "package": "com.musa.calcount",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -32,11 +39,23 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-status-bar",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "980d526f-c521-43f8-9bf1-3e5c7ed00a1f"
+      }
     }
   }
 }
