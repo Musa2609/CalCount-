@@ -11,7 +11,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { SEED_FOODS } from '@/data/seed';
-import { VisionEmptyError, parseVisionResponse, parseVisionResult } from '@/lib/vision';
+import {
+  errorForStatus,
+  formatRetryDelay,
+  parseRetryAfter,
+  parseVisionResponse,
+  parseVisionResult,
+  retryPolicyFor,
+  VisionEmptyError,
+  VisionServiceError,
+} from '@/lib/vision';
 import { appEnv } from '@/lib/env';
 import {
   barcodeFailureMessage,
@@ -868,6 +877,100 @@ test('vision parser rejects empty and invalid payloads', () => {
     () => parseVisionResponse({ items: [{ grams: 100, caloriesPer100g: 1, proteinPer100g: 1, carbsPer100g: 1, fatPer100g: 1 }] }),
     /missing a name/,
   );
+});
+
+test('vision errors keep the server code and retry delay', () => {
+  const busy = errorForStatus(503, {
+    error: 'Photo recognition is busy right now. Please try again in a moment.',
+    code: 'vision_busy',
+    retryAfterSeconds: 10800,
+  });
+  assert.ok(busy instanceof VisionServiceError);
+  assert.equal(busy.code, 'vision_busy');
+  assert.equal(busy.retryAfterSeconds, 10800);
+  // The server's generic "in a moment" must not survive a three-hour delay.
+  assert.match(busy.message, /in 3 hours\.$/);
+  assert.doesNotMatch(busy.message, /in a moment/);
+
+  const headerOnly = errorForStatus(503, { code: 'busy' }, '120');
+  assert.equal(headerOnly.code, 'busy');
+  assert.equal(headerOnly.retryAfterSeconds, 120);
+  assert.match(headerOnly.message, /in 2 minutes\.$/);
+
+  const bodyWins = errorForStatus(503, { code: 'vision_busy', retryAfterSeconds: 90 }, '600');
+  assert.equal(bodyWins.retryAfterSeconds, 90);
+
+  const limited = errorForStatus(429, {
+    error: 'You have analysed a lot of photos in a short time. Please wait a moment.',
+    code: 'rate_limited',
+    retryAfterSeconds: 300,
+  });
+  assert.equal(limited.code, 'rate_limited');
+  assert.equal(limited.retryAfterSeconds, 300);
+  assert.match(limited.message, /in 5 minutes\.$/);
+});
+
+test('vision quota exhaustion is reported without a retry delay', () => {
+  const exhausted = errorForStatus(503, {
+    error: 'The AI service has reached its usage limit. Please try again later.',
+    code: 'vision_quota_exhausted',
+  });
+  assert.equal(exhausted.code, 'vision_quota_exhausted');
+  assert.equal(exhausted.retryAfterSeconds, null);
+  assert.match(exhausted.message, /usage limit/);
+  assert.match(exhausted.message, /later/);
+
+  // A missing body message still explains the limit.
+  const bare = errorForStatus(503, { code: 'vision_quota_exhausted' });
+  assert.match(bare.message, /AI usage limit/);
+
+  // Unrelated failures keep their own wording and no retry delay.
+  const tooLarge = errorForStatus(413, { error: 'That photo is too large.' });
+  assert.equal(tooLarge.message, 'That photo is too large.');
+  assert.equal(tooLarge.code, null);
+  assert.equal(tooLarge.retryAfterSeconds, null);
+  assert.equal(errorForStatus(401, {}).message, 'Your session expired. Sign in again to analyse a photo.');
+});
+
+test('vision retry header and delay wording', () => {
+  assert.equal(parseRetryAfter('120'), 120);
+  assert.equal(parseRetryAfter('0.4'), 1);
+  assert.equal(parseRetryAfter(''), null);
+  assert.equal(parseRetryAfter(null), null);
+  assert.equal(parseRetryAfter('soon'), null);
+  const seconds = parseRetryAfter(new Date(Date.now() + 300_000).toUTCString());
+  assert.ok(seconds !== null && seconds >= 295 && seconds <= 301);
+
+  assert.equal(formatRetryDelay(0), 'in a moment');
+  assert.equal(formatRetryDelay(30), 'in a moment');
+  assert.equal(formatRetryDelay(59), 'in a moment');
+  assert.equal(formatRetryDelay(60), 'in 1 minute');
+  assert.equal(formatRetryDelay(300), 'in 5 minutes');
+  assert.equal(formatRetryDelay(3600), 'in 1 hour');
+  assert.equal(formatRetryDelay(7200), 'in 2 hours');
+  assert.equal(formatRetryDelay(10800), 'in 3 hours');
+});
+
+test('vision retry policy cooldown gates the retry button', () => {
+  const busy = errorForStatus(503, { code: 'vision_busy', retryAfterSeconds: 10800 });
+  assert.deepEqual(retryPolicyFor(busy), { allowsRetry: true, cooldownMs: 10_800_000 });
+
+  const limited = errorForStatus(429, { code: 'rate_limited', retryAfterSeconds: 60 });
+  assert.deepEqual(retryPolicyFor(limited), { allowsRetry: true, cooldownMs: 60_000 });
+
+  const exhausted = errorForStatus(503, {
+    code: 'vision_quota_exhausted',
+    retryAfterSeconds: 3600,
+  });
+  assert.deepEqual(retryPolicyFor(exhausted), { allowsRetry: false, cooldownMs: 0 });
+
+  // Network failures, empty results and unknown errors stay immediately retryable.
+  assert.deepEqual(retryPolicyFor(new Error('boom')), { allowsRetry: true, cooldownMs: 0 });
+  assert.deepEqual(retryPolicyFor(new VisionEmptyError()), { allowsRetry: true, cooldownMs: 0 });
+  assert.deepEqual(retryPolicyFor(errorForStatus(500, {})), {
+    allowsRetry: true,
+    cooldownMs: 0,
+  });
 });
 
 // ---------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Image } from 'expo-image';
@@ -23,7 +23,9 @@ import { nutrientsForQuantity } from '@/lib/nutrition';
 import { errorMessage, formatCalories, makeId } from '@/lib/utils';
 import { parseNumericInput } from '@/lib/validation';
 import {
+  formatRetryDelay,
   recogniseFoodPhoto,
+  retryPolicyFor,
   visionEnabled,
   VisionEmptyError,
   type VisionItem,
@@ -97,6 +99,19 @@ export default function ScanScreen() {
   const [error, setError] = useState<string | null>(null);
   const [emptyResult, setEmptyResult] = useState(false);
   const [warnings, setWarnings] = useState<string[]>([]);
+  // A spent AI quota cannot be retried; a busy service only needs a wait.
+  const [limitReached, setLimitReached] = useState(false);
+  const [cooldown, setCooldown] = useState<{ until: number; seconds: number } | null>(null);
+
+  /** One timer, so the button re-enables exactly when the server allows it. */
+  useEffect(() => {
+    if (!cooldown) return;
+    const timer = setTimeout(
+      () => setCooldown(null),
+      Math.max(0, cooldown.until - Date.now()),
+    );
+    return () => clearTimeout(timer);
+  }, [cooldown]);
 
   /**
    * Picking and taking photos works with or without a vision service: the user
@@ -116,6 +131,9 @@ export default function ScanScreen() {
     setGrams([]);
     setEmptyResult(false);
     setWarnings([]);
+    // A new photo is a new request: let the server answer for itself.
+    setLimitReached(false);
+    setCooldown(null);
   };
 
   const takePhoto = async () => {
@@ -181,6 +199,8 @@ export default function ScanScreen() {
       setItems(result.items);
       setGrams(result.items.map((item) => String(Math.round(item.grams))));
       setWarnings(result.warnings);
+      setLimitReached(false);
+      setCooldown(null);
     } catch (cause) {
       setItems([]);
       setGrams([]);
@@ -189,6 +209,16 @@ export default function ScanScreen() {
         setEmptyResult(true);
       } else {
         setError(errorMessage(cause, 'Could not analyse that photo.'));
+        const policy = retryPolicyFor(cause);
+        setLimitReached(!policy.allowsRetry);
+        setCooldown(
+          policy.cooldownMs > 0
+            ? {
+                until: Date.now() + policy.cooldownMs,
+                seconds: Math.max(1, Math.round(policy.cooldownMs / 1000)),
+              }
+            : null,
+        );
       }
     } finally {
       setAnalyzing(false);
@@ -227,7 +257,8 @@ export default function ScanScreen() {
     });
   };
 
-  const canRetry = Boolean(image) && visionEnabled && !analyzing;
+  const coolingDown = cooldown !== null;
+  const canRetry = Boolean(image) && visionEnabled && !analyzing && !limitReached;
 
   return (
     <Screen scroll contentStyle={styles.content} bottomInset={spacing.huge}>
@@ -314,7 +345,7 @@ export default function ScanScreen() {
             icon={Sparkles}
             onPress={analyse}
             loading={analyzing}
-            disabled={!image}
+            disabled={!image || coolingDown || limitReached}
             fullWidth
           />
         ) : (
@@ -338,7 +369,14 @@ export default function ScanScreen() {
         ) : null}
 
         {canRetry && (error || emptyResult) ? (
-          <Button label="Try again" variant="secondary" onPress={analyse} fullWidth />
+          <Button
+            // The label states the real wait, so a 3-hour delay is not "a moment".
+            label={cooldown ? `Try again ${formatRetryDelay(cooldown.seconds)}` : 'Try again'}
+            variant="secondary"
+            onPress={analyse}
+            disabled={coolingDown}
+            fullWidth
+          />
         ) : null}
       </Card>
 

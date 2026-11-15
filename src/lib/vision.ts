@@ -73,6 +73,26 @@ export class VisionEmptyError extends Error {
   }
 }
 
+/**
+ * A rejection from the Edge Function. It keeps the server's `code` and retry
+ * delay so the screen can respect a real cooldown instead of inviting an
+ * immediate retry that the service will only reject again.
+ */
+export class VisionServiceError extends Error {
+  readonly code: string | null;
+  readonly retryAfterSeconds: number | null;
+
+  constructor(
+    message: string,
+    options: { code?: string | null; retryAfterSeconds?: number | null } = {},
+  ) {
+    super(message);
+    this.name = 'VisionServiceError';
+    this.code = options.code ?? null;
+    this.retryAfterSeconds = options.retryAfterSeconds ?? null;
+  }
+}
+
 export const visionEnabled = isVisionConfigured;
 
 /** The Edge Function waits on Gemini + USDA, so the client must be patient. */
@@ -185,30 +205,130 @@ async function authHeaders(): Promise<Record<string, string>> {
   return headers;
 }
 
-function errorForStatus(status: number, body: unknown): Error {
+/** Reads `Retry-After`, which the server sends as seconds (RFC-date also works). */
+export function parseRetryAfter(value: string | null | undefined): number | null {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const seconds = Number(trimmed);
+  if (Number.isFinite(seconds)) return seconds > 0 ? Math.ceil(seconds) : null;
+  const date = Date.parse(trimmed);
+  if (Number.isFinite(date)) {
+    const delta = Math.ceil((date - Date.now()) / 1000);
+    if (delta > 0) return delta;
+  }
+  return null;
+}
+
+/** The body value wins; the `Retry-After` header is the fallback. */
+function readRetrySeconds(body: unknown, retryAfterHeader: string | null | undefined): number | null {
+  if (body && typeof body === 'object') {
+    const value = (body as { retryAfterSeconds?: unknown }).retryAfterSeconds;
+    if (typeof value === 'number' && Number.isFinite(value) && value > 0) return Math.ceil(value);
+    const fromBody = parseRetryAfter(typeof value === 'string' ? value : null);
+    if (fromBody !== null) return fromBody;
+  }
+  return parseRetryAfter(retryAfterHeader);
+}
+
+function readErrorCode(body: unknown): string | null {
+  if (!body || typeof body !== 'object') return null;
+  const value = (body as { code?: unknown }).code;
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed ? trimmed.slice(0, 60) : null;
+}
+
+/** "in a moment" under a minute, then minutes, then hours. */
+export function formatRetryDelay(seconds: number): string {
+  const safe = Number.isFinite(seconds) && seconds > 0 ? seconds : 0;
+  if (safe < 60) return 'in a moment';
+  if (safe < 3600) {
+    const minutes = Math.max(1, Math.ceil(safe / 60));
+    return `in ${minutes} ${minutes === 1 ? 'minute' : 'minutes'}`;
+  }
+  const hours = Math.max(1, Math.round(safe / 3600));
+  return `in ${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+}
+
+export interface VisionRetryPolicy {
+  /** `false` when another attempt cannot succeed, e.g. a spent daily quota. */
+  allowsRetry: boolean;
+  /** How long the screen must wait before another attempt; 0 means now. */
+  cooldownMs: number;
+}
+
+export function retryPolicyFor(error: unknown): VisionRetryPolicy {
+  if (error instanceof VisionServiceError) {
+    if (error.code === 'vision_quota_exhausted') return { allowsRetry: false, cooldownMs: 0 };
+    const seconds = error.retryAfterSeconds;
+    if (seconds !== null && seconds > 0) {
+      return { allowsRetry: true, cooldownMs: Math.round(seconds * 1000) };
+    }
+  }
+  return { allowsRetry: true, cooldownMs: 0 };
+}
+
+export function errorForStatus(
+  status: number,
+  body: unknown,
+  retryAfterHeader: string | null = null,
+): VisionServiceError {
   const message =
     body && typeof body === 'object' && typeof (body as { error?: unknown }).error === 'string'
       ? ((body as { error: string }).error.length <= 240
           ? (body as { error: string }).error
           : (body as { error: string }).error.slice(0, 240))
       : null;
+  const code = readErrorCode(body);
+  const retryAfterSeconds = readRetrySeconds(body, retryAfterHeader);
+  const options = { code, retryAfterSeconds };
 
+  if (code === 'vision_quota_exhausted') {
+    return new VisionServiceError(
+      message ?? 'Photo recognition has reached its AI usage limit. Please try again later.',
+      options,
+    );
+  }
+  if (code === 'vision_busy' || code === 'busy') {
+    // The server says "in a moment"; a long Retry-After must not repeat that.
+    const prefix =
+      code === 'busy'
+        ? 'Photo recognition is at capacity right now.'
+        : 'Photo recognition is busy right now.';
+    return new VisionServiceError(
+      retryAfterSeconds !== null
+        ? `${prefix} Please try again ${formatRetryDelay(retryAfterSeconds)}.`
+        : (message ?? `${prefix} Please try again in a moment.`),
+      options,
+    );
+  }
   if (status === 401 || status === 403) {
-    return new Error('Your session expired. Sign in again to analyse a photo.');
+    return new VisionServiceError('Your session expired. Sign in again to analyse a photo.', options);
   }
   if (status === 404) {
-    return new Error('Photo recognition is not deployed for this project yet.');
+    return new VisionServiceError('Photo recognition is not deployed for this project yet.', options);
   }
   if (status === 413) {
-    return new Error(message ?? 'That photo is too large. Try a smaller image.');
+    return new VisionServiceError(message ?? 'That photo is too large. Try a smaller image.', options);
   }
   if (status === 429) {
-    return new Error(message ?? 'Too many photo analyses. Please wait a moment.');
+    return new VisionServiceError(
+      retryAfterSeconds !== null
+        ? `You have analysed a lot of photos in a short time. Please try again ${formatRetryDelay(
+            retryAfterSeconds,
+          )}.`
+        : (message ?? 'Too many photo analyses. Please wait a moment.'),
+      options,
+    );
   }
   if (status >= 500) {
-    return new Error(message ?? 'Photo recognition is unavailable right now. Please try again.');
+    return new VisionServiceError(
+      message ?? 'Photo recognition is unavailable right now. Please try again.',
+      options,
+    );
   }
-  return new Error(message ?? `The photo service responded with ${status}.`);
+  return new VisionServiceError(message ?? `The photo service responded with ${status}.`, options);
 }
 
 export async function recogniseFoodPhoto(input: {
@@ -240,7 +360,7 @@ export async function recogniseFoodPhoto(input: {
 
     const payload: unknown = await response.json().catch(() => null);
     if (!response.ok) {
-      throw errorForStatus(response.status, payload);
+      throw errorForStatus(response.status, payload, response.headers?.get('retry-after') ?? null);
     }
     return parseVisionResult(payload);
   } finally {
