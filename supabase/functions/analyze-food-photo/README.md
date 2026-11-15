@@ -3,7 +3,7 @@
 Turns a meal photo into reviewable food items:
 
 ```
-Expo app ──JWT──▶ analyze-food-photo ──▶ OpenAI Responses API (vision)
+Expo app ──JWT──▶ analyze-food-photo ──▶ Google Gemini API (vision)
                                 └─────▶ USDA FoodData Central (nutrition)
 ```
 
@@ -23,9 +23,9 @@ npx supabase login
 npx supabase link --project-ref dmtoxuyjgrtlkkloewcu
 
 # 3. Set the secrets (never commit these)
-npx supabase secrets set OPENAI_API_KEY=sk-... USDA_API_KEY=...
-# optional, defaults to gpt-4.1-mini
-npx supabase secrets set OPENAI_VISION_MODEL=gpt-4.1-mini
+npx supabase secrets set GEMINI_API_KEY=... USDA_API_KEY=...
+# optional, defaults to gemini-2.5-flash-lite
+npx supabase secrets set GEMINI_VISION_MODEL=gemini-2.5-flash-lite
 
 # 4. Deploy. JWT verification stays ON: do not pass --no-verify-jwt.
 npx supabase functions deploy analyze-food-photo --use-api
@@ -44,13 +44,30 @@ npx supabase secrets list
 
 | Name                  | Required | Purpose                                        |
 | --------------------- | -------- | ---------------------------------------------- |
-| `OPENAI_API_KEY`      | yes      | Responses API vision call                      |
+| `GEMINI_API_KEY`      | yes      | Gemini Developer API vision call               |
 | `USDA_API_KEY`        | yes      | FoodData Central search + nutrient panel       |
-| `OPENAI_VISION_MODEL` | no       | Defaults to `gpt-4.1-mini` (must accept images) |
+| `GEMINI_VISION_MODEL` | no       | Defaults to `gemini-2.5-flash-lite`            |
 
 `SUPABASE_URL` and `SUPABASE_ANON_KEY` are injected by the platform.
 
-Rotating a key is `npx supabase secrets set OPENAI_API_KEY=...` followed by a
+## Gemini configuration
+
+The function calls Google's Gemini Developer API with the validated image:
+
+* **Endpoint** — `POST https://generativelanguage.googleapis.com/v1beta/models/<model>:generateContent`, with the key in the `x-goog-api-key` request header (Google's documented auth). The key is never put in the URL, so a logged URL cannot leak it.
+* **Model** — `gemini-2.5-flash-lite` by default; override with `GEMINI_VISION_MODEL`.
+* **Image** — the base64 bytes that already passed validation, sent as
+  `contents[0].parts[].inlineData = { mimeType, data }` together with the food
+  analysis prompt.
+* **Output** — `generationConfig.responseMimeType = "application/json"`, so the
+  reply is the `{ "items": [...] }` JSON the pipeline expects. Fences and
+  surrounding prose are still tolerated, and unreadable output becomes a `502`.
+
+There is **no OpenAI fallback**. If the Gemini key is missing, rejected, out of
+quota or unreachable, the request fails with one of the codes below and no
+other paid provider is called.
+
+Rotating a key is `npx supabase secrets set GEMINI_API_KEY=...` followed by a
 re-deploy of nothing — secrets take effect on the next invocation.
 
 ## Request
@@ -89,7 +106,7 @@ Content-Type: application/json
     }
   ],
   "warnings": ["\"Sauce\" is an AI estimate — no confident USDA FoodData Central match was found."],
-  "model": "gpt-4.1-mini",
+  "model": "gemini-2.5-flash-lite",
   "generatedAt": "2026-11-14T10:00:00.000Z"
 }
 ```
@@ -119,12 +136,12 @@ the app's empty state, not an error.
 | 415    | `unsupported_image`        | Not JPEG/PNG/WebP (e.g. HEIC)            |
 | 422    | `invalid_image`            | Vision API rejected the image            |
 | 429    | `rate_limited`             | Per-user quota (8 per 5 min)             |
-| 503    | `vision_not_configured`    | `OPENAI_API_KEY` missing                 |
-| 503    | `vision_quota_exhausted`   | OpenAI account has no credit (429)       |
-| 502    | `vision_model_missing`     | OpenAI does not know this model (404)    |
+| 503    | `vision_not_configured`    | `GEMINI_API_KEY` missing                 |
+| 503    | `vision_quota_exhausted`   | Gemini usage limit/billing cap reached (429) |
+| 502    | `vision_model_missing`     | Gemini does not know this model (404)    |
 | 503    | `busy`                     | Instance concurrency cap (6)             |
-| 504    | `vision_timeout`           | OpenAI exceeded 45 s                     |
-| 502    | `vision_failed`            | OpenAI error or unreachable              |
+| 504    | `vision_timeout`           | Gemini exceeded 45 s                     |
+| 502    | `vision_failed`            | Gemini error or unreachable              |
 
 Responses include `Retry-After` where it applies.
 
@@ -141,30 +158,50 @@ npx supabase logs --remote --service functions --since 1h \
 
 Codes worth knowing:
 
-* `vision_quota_exhausted` — OpenAI accepted the authenticated request and
-  refused it for billing reasons. Retrying will not help; the OpenAI account
-  needs credit or a higher budget cap.
-* `vision_busy` — a genuine rate limit. OpenAI's `Retry-After` is passed through.
-* `vision_model_missing` — `OPENAI_VISION_MODEL` names a model the key cannot use.
-* `vision_auth_failed` — the OpenAI key itself was rejected (401/403).
+* `vision_quota_exhausted` — Gemini named a spent allowance: a structured
+  `QuotaFailure` id such as `…PerDay…`, or wording that mentions billing/quota.
+  It does not necessarily mean the account is unfunded — a free-tier daily cap
+  produces it too — so the client message says "usage limit". Retrying soon
+  will not help.
+* `vision_busy` — a temporary per-minute limit. Gemini's `Retry-After`, then
+  its `RetryInfo.retryDelay`, is passed through to the app.
+* `vision_model_missing` — `GEMINI_VISION_MODEL` names a model the key cannot use.
+* `vision_auth_failed` — the Gemini key itself was rejected (401/403/400).
 
-To see OpenAI's own words for a 429 (run locally, your key is never shared):
+To see Gemini's own words for a 429 (run locally, your key is never shared):
 
 ```bash
-curl -s https://api.openai.com/v1/responses \
-  -H "Authorization: Bearer $OPENAI_API_KEY" \
+curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"model":"gpt-4.1-mini","input":"hi","max_output_tokens":16}'
+  -d '{"contents":[{"parts":[{"text":"hi"}]}]}'
 ```
 
-`"type":"insufficient_quota"` in that output means the account is unfunded —
-which is what a 429 with `vision_quota_exhausted` in the logs indicates.
+A `429 RESOURCE_EXHAUSTED` is not automatically "out of credit". The function
+reads `error.details` before deciding:
+
+| Signal | Result |
+| ------ | ------ |
+| `QuotaFailure` violation whose `quotaId`/`quotaMetric` is per-minute or per-second (`…PerMinute…`, `…InputTokensPerModelPerMinute…`) | `vision_busy` — a real rate limit, retrying helps |
+| `QuotaFailure` violation whose `quotaId` is per-day (`…PerDayPerProject…`) | `vision_quota_exhausted` — the allowance is spent |
+| Both per-minute and per-day violations | `vision_quota_exhausted` — the daily one is binding |
+| `RetryInfo.retryDelay` only (no `QuotaFailure`, no billing wording) | `vision_busy` — the delay is passed through, however long |
+| Message says "you exceeded your current quota… billing" | `vision_quota_exhausted` |
+| Anything else | `vision_busy` |
+
+A long `retryDelay` is only a hint about timing, so it never becomes
+`vision_quota_exhausted` on its own. A `Retry-After` header outranks
+`RetryInfo`; either outranks the 15 s default. The quota id also lands in the log line's `upstream` field (for
+example `429/RESOURCE_EXHAUSTED/GenerateRequestsPerDayPerProjectPerModel-FreeTier`).
 
 ## Verification
 
 ```bash
 # Unit + pipeline tests (Node, stubbed upstreams)
-node --test supabase/functions/analyze-food-photo/test/analyze.test.ts
+npm run test:vision
+
+# Edge Function typecheck (Deno types, not the app tsconfig)
+npx deno check supabase/functions/analyze-food-photo/index.ts
 
 # From the app: typecheck, lint, QA, dependency doctor
 npx tsc --noEmit && npx expo lint && npm run test:qa && npx expo-doctor
@@ -190,13 +227,13 @@ curl -sS -X POST "$PROJECT/functions/v1/analyze-food-photo" \
 ## Limits and known gaps
 
 * **Rate limiting is per warm instance, in memory.** It caps abuse per
-  instance and protects the OpenAI budget, but N instances allow N× the quota.
+  instance and protects the Gemini budget, but N instances allow N× the quota.
   Supabase applies its own project-level limits on top. For a hard global cap,
   move the counters into Postgres.
 * **USDA matching is lexical**, not semantic. Words that differ from USDA
   descriptions ("aubergine" vs "eggplant") fall back to an AI estimate rather
   than a wrong match.
-* **No caching.** The same photo re-analysed costs another OpenAI call.
+* **No caching.** The same photo re-analysed costs another Gemini call.
 * **No image storage.** Photos are processed in memory and never written
   anywhere; nothing about the image is logged.
 * Branded USDA records are excluded on purpose — Foundation, SR Legacy and

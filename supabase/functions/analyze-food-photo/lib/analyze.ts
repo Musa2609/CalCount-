@@ -1,5 +1,5 @@
 import { HttpError } from './errors.ts';
-import { MAX_ITEMS_PER_PHOTO, identifyFoods } from './openai.ts';
+import { MAX_ITEMS_PER_PHOTO, identifyFoods, DEFAULT_VISION_MODEL } from './gemini.ts';
 import { buildAnalyzedItems, sanitizeAiItems, type AnalyzedItem } from './nutrition.ts';
 import { findUsdaMatch, type UsdaLookup } from './usda.ts';
 import type { FetchLike } from './types.ts';
@@ -11,13 +11,24 @@ import type { FetchLike } from './types.ts';
  * exercised with stubbed upstreams in the test suite.
  */
 export interface AnalyzeOptions {
-  openAiKey: string;
+  // Preferred new name.
+  geminiKey?: string;
+  // Backwards-compatible aliases (old OpenAI name and a generic one).
+  openAiKey?: string;
+  apiKey?: string;
   usdaKey: string;
   model?: string;
+  geminiModel?: string;
+  openAiModel?: string;
   fetchImpl?: FetchLike;
+  geminiTimeoutMs?: number;
   openAiTimeoutMs?: number;
-  usdaTimeoutMs?: number;
+  timeoutMs?: number;
+  geminiEndpoint?: string;
   openAiEndpoint?: string;
+  endpoint?: string;
+  geminiBaseUrl?: string;
+  usdaTimeoutMs?: number;
   usdaBaseUrl?: string;
   now?: () => number;
 }
@@ -29,11 +40,16 @@ export interface AnalyzeResult {
   generatedAt: string;
 }
 
+function resolveVisionKey(options: AnalyzeOptions): string {
+  return (options.geminiKey ?? options.openAiKey ?? options.apiKey ?? '').trim();
+}
+
 export async function analyzeFoodPhoto(
   image: { base64: string; mimeType: string },
   options: AnalyzeOptions,
 ): Promise<AnalyzeResult> {
-  if (!options.openAiKey) {
+  const visionKey = resolveVisionKey(options);
+  if (!visionKey) {
     throw new HttpError(
       503,
       'vision_not_configured',
@@ -44,14 +60,21 @@ export async function analyzeFoodPhoto(
   const fetchImpl = (options.fetchImpl ?? fetch) as FetchLike;
   const now = options.now ?? (() => Date.now());
 
+  const model =
+    options.model ??
+    options.geminiModel ??
+    options.openAiModel ??
+    DEFAULT_VISION_MODEL;
+
   const identification = await identifyFoods({
     base64: image.base64,
     mimeType: image.mimeType,
-    apiKey: options.openAiKey,
-    model: options.model ?? 'gpt-4.1-mini',
+    apiKey: visionKey,
+    model,
     fetchImpl,
-    timeoutMs: options.openAiTimeoutMs,
-    endpoint: options.openAiEndpoint,
+    timeoutMs: options.geminiTimeoutMs ?? options.openAiTimeoutMs ?? options.timeoutMs,
+    endpoint: options.geminiEndpoint ?? options.openAiEndpoint ?? options.endpoint,
+    baseUrl: options.geminiBaseUrl,
   });
 
   const { items: aiItems, dropped } = sanitizeAiItems(

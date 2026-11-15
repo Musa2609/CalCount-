@@ -2,7 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 import { analyzeFoodPhoto } from './lib/analyze.ts';
 import { HttpError, toClientError } from './lib/errors.ts';
-import { DEFAULT_VISION_MODEL } from './lib/openai.ts';
+import { DEFAULT_VISION_MODEL } from './lib/gemini.ts';
 import { createConcurrencyGuard, createRateLimiter } from './lib/rateLimit.ts';
 import { MAX_REQUEST_BYTES, validateAnalyzePayload } from './lib/validation.ts';
 
@@ -14,7 +14,7 @@ import { MAX_REQUEST_BYTES, validateAnalyzePayload } from './lib/validation.ts';
  * Response: { items: [...], warnings: [...], model, generatedAt }
  *
  * Secrets (Edge Function env, never shipped to the app):
- *   OPENAI_API_KEY, USDA_API_KEY, optional OPENAI_VISION_MODEL.
+ *   GEMINI_API_KEY, USDA_API_KEY, optional GEMINI_VISION_MODEL.
  */
 const CORS_HEADERS: Record<string, string> = {
   'Access-Control-Allow-Origin': '*',
@@ -84,9 +84,9 @@ Deno.serve(async (req: Request) => {
 
   let userId: string | null = null;
   try {
-    const openAiKey = (Deno.env.get('OPENAI_API_KEY') ?? '').trim();
+    const geminiKey = (Deno.env.get('GEMINI_API_KEY') ?? '').trim();
     const usdaKey = (Deno.env.get('USDA_API_KEY') ?? '').trim();
-    if (!openAiKey) {
+    if (!geminiKey) {
       throw new HttpError(
         503,
         'vision_not_configured',
@@ -147,9 +147,9 @@ Deno.serve(async (req: Request) => {
       result = await analyzeFoodPhoto(
         { base64: image.base64, mimeType: image.mimeType },
         {
-          openAiKey,
+          geminiKey,
           usdaKey,
-          model: (Deno.env.get('OPENAI_VISION_MODEL') ?? '').trim() || DEFAULT_VISION_MODEL,
+          model: (Deno.env.get('GEMINI_VISION_MODEL') ?? '').trim() || DEFAULT_VISION_MODEL,
         },
       );
     } finally {

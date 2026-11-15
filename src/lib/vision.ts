@@ -6,7 +6,7 @@ import { getSupabaseClient } from '@/lib/supabase/client';
  * Function.
  *
  * The app ships NO vision model and never fabricates a result. The photo goes
- * to the Edge Function (which holds OPENAI_API_KEY and USDA_API_KEY); the app
+ * to the Edge Function (which holds GEMINI_API_KEY and USDA_API_KEY); the app
  * authenticates with the user's Supabase access token and shows the response
  * for review before anything is logged.
  *
@@ -75,7 +75,7 @@ export class VisionEmptyError extends Error {
 
 export const visionEnabled = isVisionConfigured;
 
-/** The Edge Function waits on OpenAI + USDA, so the client must be patient. */
+/** The Edge Function waits on Gemini + USDA, so the client must be patient. */
 const REQUEST_TIMEOUT_MS = 75_000;
 
 function readNumber(input: Record<string, unknown>, key: string): number {

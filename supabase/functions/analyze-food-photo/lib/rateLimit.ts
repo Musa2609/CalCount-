@@ -3,7 +3,7 @@
  *
  * This is an in-memory fixed window, so it is per warm instance rather than
  * global: it stops a single client from hammering one instance (and burning
- * OpenAI credit), but N instances allow N times the quota. Supabase also
+ * Gemini credit), but N instances allow N times the quota. Supabase also
  * applies its own per-project function limits. For a hard global cap, move the
  * counters into Postgres and increment them atomically.
  */
