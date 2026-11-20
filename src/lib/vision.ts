@@ -93,7 +93,16 @@ export class VisionServiceError extends Error {
   }
 }
 
-export const visionEnabled = isVisionConfigured;
+/**
+ * Kill switch for AI food-photo recognition.
+ *
+ * Photo analysis is temporarily switched off while the production service is
+ * unreliable. Nothing is removed: flip this back to `true` to restore the
+ * feature — the Edge Function, Gemini and USDA integrations are untouched.
+ */
+export const PHOTO_RECOGNITION_ENABLED: boolean = false;
+
+export const visionEnabled = PHOTO_RECOGNITION_ENABLED && isVisionConfigured;
 
 /** The Edge Function waits on Gemini + USDA, so the client must be patient. */
 const REQUEST_TIMEOUT_MS = 75_000;

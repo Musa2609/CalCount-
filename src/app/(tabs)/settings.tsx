@@ -38,6 +38,7 @@ import { useSubmit } from '@/hooks/useSubmit';
 import { todayKey } from '@/lib/dates';
 import { buildGoalPlan } from '@/lib/nutrition';
 import { hasLocalData, migrateLocalToCloud } from '@/lib/migration';
+import { PHOTO_RECOGNITION_ENABLED } from '@/lib/vision';
 import {
   formatHeight,
   formatWeight,
@@ -361,13 +362,15 @@ export default function SettingsScreen() {
             onPress={() => router.push('/saved-meals')}
             chevron
           />
-          <SettingRow
-            label="Photo logging"
-            value="Beta"
-            icon={Camera}
-            onPress={() => router.push('/scan')}
-            chevron
-          />
+          {PHOTO_RECOGNITION_ENABLED ? (
+            <SettingRow
+              label="Photo logging"
+              value="Beta"
+              icon={Camera}
+              onPress={() => router.push('/scan')}
+              chevron
+            />
+          ) : null}
           <SettingRow
             label="Food search"
             value="Browse catalogue"

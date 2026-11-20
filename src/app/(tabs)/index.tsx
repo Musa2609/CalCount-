@@ -16,6 +16,7 @@ import { useDiary } from '@/hooks/useDiary';
 import { useGoals } from '@/hooks/useGoals';
 import { formatLongDate, todayKey } from '@/lib/dates';
 import { EMPTY_NUTRIENTS } from '@/lib/nutrition';
+import { PHOTO_RECOGNITION_ENABLED } from '@/lib/vision';
 import {
   firstName,
   formatCalories,
@@ -194,19 +195,21 @@ export default function HomeScreen() {
               onPress={() => router.push({ pathname: '/food/search', params: { date: today } })}
             />
 
-            <Pressable
-              accessibilityRole="button"
-              onPress={() => router.push('/scan')}
-              style={({ pressed }) => [styles.scanRow, pressed ? styles.pressed : null]}
-            >
-              <Camera size={16} color={colors.textSecondary} strokeWidth={2.2} />
-              <AppText variant="small" color="secondary">
-                Log from a photo
-              </AppText>
-              <AppText variant="caption" color="muted">
-                BETA
-              </AppText>
-            </Pressable>
+            {PHOTO_RECOGNITION_ENABLED ? (
+              <Pressable
+                accessibilityRole="button"
+                onPress={() => router.push('/scan')}
+                style={({ pressed }) => [styles.scanRow, pressed ? styles.pressed : null]}
+              >
+                <Camera size={16} color={colors.textSecondary} strokeWidth={2.2} />
+                <AppText variant="small" color="secondary">
+                  Log from a photo
+                </AppText>
+                <AppText variant="caption" color="muted">
+                  BETA
+                </AppText>
+              </Pressable>
+            ) : null}
 
             <AppText variant="caption" color="muted" align="center">
               Values come from your logged foods. Tap any entry to see its source and adjust

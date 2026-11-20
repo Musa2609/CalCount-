@@ -24,6 +24,7 @@ import { errorMessage, formatCalories, makeId } from '@/lib/utils';
 import { parseNumericInput } from '@/lib/validation';
 import {
   formatRetryDelay,
+  PHOTO_RECOGNITION_ENABLED,
   recogniseFoodPhoto,
   retryPolicyFor,
   visionEnabled,
@@ -259,6 +260,41 @@ export default function ScanScreen() {
 
   const coolingDown = cooldown !== null;
   const canRetry = Boolean(image) && visionEnabled && !analyzing && !limitReached;
+
+  /**
+   * Photo analysis is switched off in this build. A deep link must still land
+   * somewhere useful, so offer the routes that keep working.
+   */
+  if (!PHOTO_RECOGNITION_ENABLED) {
+    return (
+      <Screen scroll contentStyle={styles.content} bottomInset={spacing.huge}>
+        <AppHeader
+          title="Log from a photo"
+          subtitle="AI meal photos are off for now."
+          showBack
+        />
+
+        <Notice
+          tone="info"
+          title="Photo recognition is paused"
+          message="AI photo analysis is temporarily switched off while the service is fixed. Your diary, food search, barcode scanning, custom foods, saved meals and recipes all still work."
+        />
+
+        <Button
+          label="Search foods instead"
+          icon={Search}
+          onPress={() => router.replace({ pathname: '/food/search', params: { meal: mealType, date } })}
+          fullWidth
+        />
+        <Button
+          label="Create a custom food"
+          variant="secondary"
+          onPress={() => router.replace({ pathname: '/food/new', params: { meal: mealType, date } })}
+          fullWidth
+        />
+      </Screen>
+    );
+  }
 
   return (
     <Screen scroll contentStyle={styles.content} bottomInset={spacing.huge}>

@@ -22,6 +22,7 @@ import { formatFriendlyDate, todayKey } from '@/lib/dates';
 import { cacheFood } from '@/lib/foodCache';
 import { nutrientsForQuantity } from '@/lib/nutrition';
 import { appEnv } from '@/lib/env';
+import { PHOTO_RECOGNITION_ENABLED } from '@/lib/vision';
 import {
   BARCODE_DISABLED_MESSAGE,
   barcodeFailureMessage,
@@ -145,14 +146,16 @@ export default function FoodSearchScreen() {
         subtitle={`${MEAL_LABELS[mealType]} · ${formatFriendlyDate(date)}`}
         showBack
         right={
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="Log from a photo"
-            onPress={() => router.push({ pathname: '/scan', params: { meal: mealType, date } })}
-            style={({ pressed }) => [styles.headerButton, pressed ? styles.pressed : null]}
-          >
-            <Camera size={19} color={colors.textSecondary} strokeWidth={2.2} />
-          </Pressable>
+          PHOTO_RECOGNITION_ENABLED ? (
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel="Log from a photo"
+              onPress={() => router.push({ pathname: '/scan', params: { meal: mealType, date } })}
+              style={({ pressed }) => [styles.headerButton, pressed ? styles.pressed : null]}
+            >
+              <Camera size={19} color={colors.textSecondary} strokeWidth={2.2} />
+            </Pressable>
+          ) : null
         }
       />
 
